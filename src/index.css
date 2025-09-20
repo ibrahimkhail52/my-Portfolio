@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Space Grotesk',sans-serif;
+}
+
+
+.custom-shadow:hover {
+  box-shadow: 0 0px 40px rgba(176, 212, 221, 0.9); /* lighter/stronger shadow on hover */
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
