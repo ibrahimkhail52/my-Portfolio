@@ -9,7 +9,6 @@ import WelcomePage from "../WelcomePage/WelcomePage";
 import WhatsAppButton from "../WhatsAppButton/WhatsAppButton";
 import watanPaint from "../../assets/Portfolio img/watan-paint.png";
 import sunTower from "../../assets/Portfolio img/sun-tower.png";
-import designerup from "../../assets/Portfolio img/designerUP.png";
 import adieHospital from "../../assets/Portfolio img/adie-hospital.png";
 import comingSoon from "../../assets/Portfolio img/coming-soon.jpeg";
 
@@ -64,23 +63,23 @@ export default function Portfolio() {
     },
     {
       id: 4,
-      title: "DesignerUP",
+      title: "Coming Soon",
       tags: ["React", "Tailwind", "Vercel"],
-      link: "https://designer-up.vercel.app",
-      img: designerup,
+      link: "#",
+      img: comingSoon,
     },
     {
       id: 5,
       title: "Coming Soon",
       tags: ["React", "Tailwind", "Vercel"],
-      link: "https://designer-up.vercel.app",
+      link: "#",
       img: comingSoon,
     },
     {
       id: 6,
       title: "Coming Soon",
       tags: ["React", "Tailwind", "Vercel"],
-      link: "https://designer-up.vercel.app",
+      link: "#",
       img: comingSoon,
     },
   ];
