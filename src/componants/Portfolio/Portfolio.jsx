@@ -10,7 +10,10 @@ import WhatsAppButton from "../WhatsAppButton/WhatsAppButton";
 import watanPaint from "../../assets/Portfolio img/watan-paint.png";
 import sunTower from "../../assets/Portfolio img/sun-tower.png";
 import adieHospital from "../../assets/Portfolio img/adie-hospital.png";
+import elearna from "../../assets/Portfolio img/elearna.png";
+
 import comingSoon from "../../assets/Portfolio img/coming-soon.jpeg";
+
 
 export default function Portfolio() {
   const [dark, setDark] = useState(() => {
@@ -63,10 +66,10 @@ export default function Portfolio() {
     },
     {
       id: 4,
-      title: "Coming Soon",
+      title: "Elearna",
       tags: ["React", "Tailwind", "Vercel"],
-      link: "#",
-      img: comingSoon,
+      link: "http://elearna-eight.vercel.app",
+      img: elearna,
     },
     {
       id: 5,
