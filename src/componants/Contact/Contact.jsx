@@ -1,24 +1,52 @@
-import React from "react";
 import { motion as Motion } from "framer-motion";
 import { FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
+import { useState } from "react";
+import emailjs from "emailjs-com";
 
-// Variants for staggered animations
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(null);
+    emailjs
+      .send(
+        "service_707s7oj",
+        "template_gdm3p9n",
+        formData,
+        "tOBbCpkMZKUFtZ-cW"
+      )
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch(() => {
+        setLoading(false);
+        setSuccess(false);
+      });
+  };
+
   return (
     <section
       id="contact"
@@ -50,8 +78,6 @@ export default function Contact() {
         >
           Let’s Build Something Together
         </Motion.h2>
-
-        {/* Paragraph */}
         <Motion.p
           className="mt-4 text-center text-gray-600 dark:text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto"
           variants={itemVariants}
@@ -65,43 +91,61 @@ export default function Contact() {
           <Motion.form
             variants={itemVariants}
             className="space-y-4 p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition-shadow"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Thanks — message simulated (no backend in this demo).");
-            }}
+            onSubmit={handleSubmit}
           >
             <div>
-              <label className="block text-sm font-medium">Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Name
+              </label>
               <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 required
                 placeholder="Your Name"
                 className="w-full mt-1 p-3 rounded-lg border dark:bg-gray-900/40 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 outline-none transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Email</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Email
+              </label>
               <input
-                required
+                name="email"
                 type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
                 placeholder="you@example.com"
                 className="w-full mt-1 p-3 rounded-lg border dark:bg-gray-900/40 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 outline-none transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Message</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Message
+              </label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 required
                 rows={5}
                 placeholder="Write your message..."
                 className="w-full mt-1 p-3 rounded-lg border dark:bg-gray-900/40 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 outline-none transition"
-              ></textarea>
+              />
             </div>
+            {success === true && (
+              <p className="text-green-500">Message sent successfully!</p>
+            )}
+            {success === false && (
+              <p className="text-red-500">Something went wrong. Try again.</p>
+            )}
             <Motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg font-medium shadow-md hover:bg-indigo-700 transition"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </Motion.button>
           </Motion.form>
 
@@ -124,10 +168,8 @@ export default function Contact() {
                   ibrahimkhail237@gmail.com
                 </a>
               </p>
-
               <div className="mt-6 flex items-center gap-4">
                 {[
-                  // social links
                   {
                     href: "https://github.com/ibrahimkhail52",
                     icon: <FiGithub className="text-xl" />,
@@ -155,7 +197,6 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-
             <div className="mt-6 text-sm text-gray-500 dark:text-gray-400">
               Available for freelance and full-time roles.
             </div>
